@@ -38,7 +38,7 @@ namespace Mission09_plessem.Infrastructure
 
             TagBuilder final = new TagBuilder("div");
 
-            for (int x = 1; x < PageModel.TotalPages; x++)
+            for (int x = 1; x <= PageModel.TotalPages; x++)
             {
                 TagBuilder tb = new TagBuilder("a");
 
