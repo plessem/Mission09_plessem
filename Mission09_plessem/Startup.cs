@@ -36,6 +36,8 @@ namespace Mission09_plessem
            });
 
             services.AddScoped<IBookstoreRepository, EFBookstoreRepository>();
+
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -72,6 +74,8 @@ namespace Mission09_plessem
                     new {Controller = "Home", action ="Index", pageNum=1}); //assigning a page number if there isnt one
 
                 endpoints.MapDefaultControllerRoute();
+
+                endpoints.MapRazorPages();
             });
         }
     }
