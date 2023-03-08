@@ -54,6 +54,16 @@ namespace Mission09_plessem
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                    "typepage",
+                    "{categoryType}/Page{pageNum}",
+                    new { Controller = "Home", action = "Index" });
+
+                endpoints.MapControllerRoute(
+                    "type",
+                    "{categoryType}",
+                    new {Controller = "Home", action ="Index"});
+
+                endpoints.MapControllerRoute(
                     name: "Paging",
                     pattern: "Page{pageNum}",
                     defaults: new { Controller = "Home", action = "Index" });
