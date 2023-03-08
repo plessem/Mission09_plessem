@@ -63,7 +63,7 @@ namespace Mission09_plessem
                 endpoints.MapControllerRoute(
                     name: "Paging",
                     pattern: "Page{pageNum}",
-                    defaults: new { Controller = "Home", action = "Index" });
+                    defaults: new { Controller = "Home", action = "Index", pageNum=1 });
 
                 //if we just get a category
                 endpoints.MapControllerRoute(
