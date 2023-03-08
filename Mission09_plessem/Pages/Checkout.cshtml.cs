@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Mission09_plessem.Infrastructure;
 using Mission09_plessem.Models;
 
 namespace Mission09_plessem.Pages
@@ -18,18 +19,23 @@ namespace Mission09_plessem.Pages
 
         public Basket Basket { get; set; }
 
-        public void OnGet(Basket b)
+        public void OnGet()
         {
-            Basket = b;
+            Basket = HttpContext.Session.GetJson<Basket>("Basket") ?? new Basket();
         }
 
         public IActionResult OnPost(int bookId)
         {
             Book b = repo.Books.FirstOrDefault(x => x.BookId == bookId);
 
-            Basket = new Basket();
-
+            //use basket if it already exists, else create a new one
+            Basket = HttpContext.Session.GetJson<Basket>("Basket") ?? new Basket();
+            //add item to the basket
             Basket.AddItem(b, 1);
+
+            //set json value to whats in the basket
+            HttpContext.Session.SetJson("Basket", Basket);
+
             return RedirectToPage(Basket);
         }
     }
