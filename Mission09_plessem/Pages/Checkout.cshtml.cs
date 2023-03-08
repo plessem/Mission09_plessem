@@ -18,13 +18,15 @@ namespace Mission09_plessem.Pages
         }
 
         public Basket Basket { get; set; }
+        public string ReturnUrl { get; set; }
 
-        public void OnGet()
+        public void OnGet(string returlUrl)
         {
+            ReturnUrl = returlUrl ?? "/";
             Basket = HttpContext.Session.GetJson<Basket>("Basket") ?? new Basket();
         }
 
-        public IActionResult OnPost(int bookId)
+        public IActionResult OnPost(int bookId, string returnUrl)
         {
             Book b = repo.Books.FirstOrDefault(x => x.BookId == bookId);
 
@@ -36,7 +38,7 @@ namespace Mission09_plessem.Pages
             //set json value to whats in the basket
             HttpContext.Session.SetJson("Basket", Basket);
 
-            return RedirectToPage(Basket);
+            return RedirectToPage(new { ReturnUrl = returnUrl });
         }
     }
 }
