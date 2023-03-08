@@ -18,6 +18,8 @@ namespace Mission09_plessem.Components
 
         public IViewComponentResult Invoke()
         {
+            ViewBag.SelectedCat = RouteData?.Values["categoryType"];
+
             //select category types
             var categories = repo.Books
                 .Select(x => x.Category)

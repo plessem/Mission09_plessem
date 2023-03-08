@@ -53,20 +53,23 @@ namespace Mission09_plessem
 
             app.UseEndpoints(endpoints =>
             {
+                //if we get a category and a page num
                 endpoints.MapControllerRoute(
                     "typepage",
                     "{categoryType}/Page{pageNum}",
                     new { Controller = "Home", action = "Index" });
 
-                endpoints.MapControllerRoute(
-                    "type",
-                    "{categoryType}",
-                    new {Controller = "Home", action ="Index"});
-
+                //if we just have a page number
                 endpoints.MapControllerRoute(
                     name: "Paging",
                     pattern: "Page{pageNum}",
                     defaults: new { Controller = "Home", action = "Index" });
+
+                //if we just get a category
+                endpoints.MapControllerRoute(
+                    "type",
+                    "{categoryType}",
+                    new {Controller = "Home", action ="Index", pageNum=1}); //assigning a page number if there isnt one
 
                 endpoints.MapDefaultControllerRoute();
             });

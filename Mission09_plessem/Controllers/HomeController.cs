@@ -33,7 +33,10 @@ namespace Mission09_plessem.Controllers
 
                 PageInfo = new PageInfo
                 {
-                    TotalNumBooks = repo.Books.Count(),
+                    TotalNumBooks = 
+                    (categoryType == null 
+                        ? repo.Books.Count() 
+                        : repo.Books.Where(x=> x.Category == categoryType).Count()),
                     BooksPerPage = pageSize,
                     CurrentPage = pageNum
                 }
