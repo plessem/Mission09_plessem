@@ -18,7 +18,7 @@ namespace Mission09_plessem.Controllers
         }
 
         //setting default to page 1, if nothing comes in
-        public IActionResult Index(int pageNum = 1)
+        public IActionResult Index(string categoryType, int pageNum = 1)
         {
             //how many results you want on a page
             int pageSize = 10;
@@ -26,6 +26,7 @@ namespace Mission09_plessem.Controllers
             var x = new BooksViewModel
             {
                 Books = repo.Books
+                .Where(b=>b.Category == categoryType || categoryType == null)
                 .OrderBy(b => b.Title)
                 .Skip((pageNum - 1) * pageSize)
                 .Take(pageSize),

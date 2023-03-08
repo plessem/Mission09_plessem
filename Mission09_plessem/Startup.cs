@@ -57,6 +57,7 @@ namespace Mission09_plessem
                     name: "Paging",
                     pattern: "Page{pageNum}",
                     defaults: new { Controller = "Home", action = "Index" });
+
                 endpoints.MapDefaultControllerRoute();
             });
         }
