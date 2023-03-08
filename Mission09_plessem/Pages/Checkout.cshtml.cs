@@ -18,8 +18,9 @@ namespace Mission09_plessem.Pages
 
         public Basket Basket { get; set; }
 
-        public void OnGet()
+        public void OnGet(Basket b)
         {
+            Basket = b;
         }
 
         public IActionResult OnPost(int bookId)
@@ -29,7 +30,7 @@ namespace Mission09_plessem.Pages
             Basket = new Basket();
 
             Basket.AddItem(b, 1);
-            return RedirectToPage();
+            return RedirectToPage(Basket);
         }
     }
 }
