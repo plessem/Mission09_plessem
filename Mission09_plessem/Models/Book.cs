@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Mission09_plessem.Models
 {
-    public partial class Book
+    public class Book
     {
         [Key]
         [Required]
