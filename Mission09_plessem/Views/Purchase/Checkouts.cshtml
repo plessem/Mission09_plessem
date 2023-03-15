@@ -9,7 +9,9 @@
 <h2>Check out now</h2>
 <p>Please enter your details below.</p>
 
-<form method="post">
+<form method="post" asp-controller="Purchase" asp-action="Checkouts">
+
+    <div asp-validation-summary="All" class="text-danger"></div>
     <h4>Ship To</h4>
     <div class="form-group">
         <label asp-for="Name">Name:</label><input asp-for="Name" class="form-control" />
@@ -48,7 +50,7 @@
         </label>
     </div>
     <div class="float-end">
-        <input class="btn btn-primary" type="submit" value="Purchase Cart" />
+        <input class="btn btn-primary" type="submit" value="Purchase" />
     </div>
 
 

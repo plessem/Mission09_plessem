@@ -36,6 +36,7 @@ namespace Mission09_plessem
            });
 
             services.AddScoped<IBookstoreRepository, EFBookstoreRepository>();
+            services.AddScoped<IPurchaseRepository, EFPurchaseRepository>();
 
             services.AddRazorPages();
             services.AddDistributedMemoryCache();
