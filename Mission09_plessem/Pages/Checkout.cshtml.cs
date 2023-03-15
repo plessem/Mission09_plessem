@@ -12,9 +12,10 @@ namespace Mission09_plessem.Pages
     public class CheckoutModel : PageModel
     {
         private IBookstoreRepository repo { get; set; }
-        public CheckoutModel (IBookstoreRepository temp)
+        public CheckoutModel (IBookstoreRepository temp, Basket b)
         {
             repo = temp;
+            Basket = b;
         }
 
         public Basket Basket { get; set; }
@@ -23,22 +24,25 @@ namespace Mission09_plessem.Pages
         public void OnGet(string returlUrl)
         {
             ReturnUrl = returlUrl ?? "/";
-            Basket = HttpContext.Session.GetJson<Basket>("Basket") ?? new Basket();
+
         }
 
         public IActionResult OnPost(int bookId, string returnUrl)
         {
             Book b = repo.Books.FirstOrDefault(x => x.BookId == bookId);
 
-            //use basket if it already exists, else create a new one
-            Basket = HttpContext.Session.GetJson<Basket>("Basket") ?? new Basket();
             //add item to the basket
             Basket.AddItem(b, 1);
 
-            //set json value to whats in the basket
-            HttpContext.Session.SetJson("Basket", Basket);
-
             return RedirectToPage(new { ReturnUrl = returnUrl });
+        }
+
+        public IActionResult OnPostRemove(int bookId, string returnUrl)
+        {
+            Basket.RemoveItem(Basket.Items.First(x => x.Book.BookId == bookId).Book);
+
+            return RedirectToPage ( new {ReturnIrl = returnUrl});
+
         }
     }
 }
